@@ -9,7 +9,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Define the MQTT broker details
 broker_host = "36.92.168.180"
 broker_port = 19383
-topic = "lansitec/pub/860137071625429"
+topic = "lansitec/pub/860137071526460"
 
 # Antares Configuration
 ANTARES_BASE_URL = "https://platform.antares.id:8443"
