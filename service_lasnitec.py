@@ -9,15 +9,14 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Define the MQTT broker details
 broker_host = "36.92.168.180"
 broker_port = 19383
-topic = "lansitec/pub/860137071526460"
+topics = [
+    "lansitec/pub/860137071625429",
+    "lansitec/pub/860137071526460"
+]
 
 # Antares Configuration
 ANTARES_BASE_URL = "https://platform.antares.id:8443"
 ANTARES_PATH = f"/~/antares-cse/antares-id/Tracker_Tanto"
-
-# Extract IMEI from topic
-imei = topic.split('/')[-1]  # Gets the last part after splitting by '/'
-print(imei)
 
 # Initialize message counter
 message_counter = 0
@@ -70,12 +69,13 @@ client.on_message = on_message
 # Connect to the MQTT broker
 client.connect(broker_host, broker_port)
 
-# Subscribe to the topic
-client.subscribe(topic)
+# Subscribe to all topics
+for topic in topics:
+    client.subscribe(topic)
+    print(f"Subscribed to topic: {topic}")
 
 # Start the network loop to process received messages
 try:
-    print(f"Subscribed to topic: {topic}")
     print("Waiting for messages... (Press Ctrl+C to stop)")
     client.loop_forever()
 except KeyboardInterrupt:
